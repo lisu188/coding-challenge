@@ -1,4 +1,4 @@
-package com.company.OddOccurrencesInArray;
+package codility.OddOccurrencesInArray;
 
 import java.util.Set;
 import java.util.HashSet;

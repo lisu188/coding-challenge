@@ -1,4 +1,4 @@
-package com.company.PermMissingElem;
+package codility.PermMissingElem;
 
 import java.util.Set;
 import java.util.HashSet;

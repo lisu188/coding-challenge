@@ -1,4 +1,4 @@
-package com.company.FrogRiverOne;
+package codility.FrogRiverOne;
 
 import java.util.HashSet;
 import java.util.Set;

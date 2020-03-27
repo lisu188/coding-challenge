@@ -1,4 +1,4 @@
-package com.company.TapeEquilibrium;
+package codility.TapeEquilibrium;
 
 public class Solution {
     public static void main(String[] arr) {

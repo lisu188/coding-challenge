@@ -1,4 +1,4 @@
-package com.company.PermCheck;
+package codility.PermCheck;
 
 import java.util.Arrays;
 import java.util.Set;

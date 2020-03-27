@@ -1,4 +1,4 @@
-package com.company.FrogJmp;
+package codility.FrogJmp;
 
 import java.util.Set;
 import java.util.HashSet;

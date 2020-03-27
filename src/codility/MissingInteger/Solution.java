@@ -1,13 +1,10 @@
-package com.company.MissingInteger;
+package codility.MissingInteger;
 
 import java.util.Arrays;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.TreeSet;
 
 public class Solution {
     public static void main(String[] arr) {
-        new com.company.MissingInteger.Solution().solution(new int[]{1, 3, 6, 4, 1, 2});
+        new Solution().solution(new int[]{1, 3, 6, 4, 1, 2});
     }
 
     public int solution(int[] A) {

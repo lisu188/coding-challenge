@@ -1,4 +1,4 @@
-package com.company.MaxCounters;
+package codility.MaxCounters;
 
 import java.util.*;
 
