@@ -23,20 +23,27 @@ public class Solution {
             int upperIndex = query[1];
             long value = query[2];
 
-            List<Range> ranges = new ArrayList<>();
-
-
-            while (lowerIndex < upperIndex) {
-                Range lowerEntry = getLowerEntry(arrayRepresentation, lowerIndex);
-                ranges.add(new Range(lowerIndex, lowerEntry.value + value));
-                Range upperEntry = getUpperEntry(arrayRepresentation, lowerIndex);
-                lowerIndex = upperEntry.index;
+            if (arrayRepresentation.containsKey(lowerIndex)) {
+                arrayRepresentation.put(lowerIndex, arrayRepresentation.get(lowerIndex) + value);
+            } else {
+                arrayRepresentation.put(lowerIndex, value);
             }
-            ranges.add(new Range(upperIndex, getLowerEntry(arrayRepresentation, upperIndex).value));
 
-            ranges.forEach(range -> arrayRepresentation.put(range.index, range.value));
+            if (arrayRepresentation.containsKey(upperIndex)) {
+                arrayRepresentation.put(upperIndex, arrayRepresentation.get(upperIndex) - value);
+            } else {
+                arrayRepresentation.put(upperIndex, -value);
+            }
         }
-        return arrayRepresentation.values().stream().max(Long::compareTo).get();
+        long currentMax = 0;
+        long currentValue = 0;
+        for (Long val : arrayRepresentation.values()) {
+            currentValue += val;
+            if (currentValue > currentMax) {
+                currentMax = currentValue;
+            }
+        }
+        return currentMax;
     }
 
     public static void main(String[] args) throws IOException {
