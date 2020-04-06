@@ -1,8 +1,12 @@
 package hackerrank.SherlockAndAnagrams;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -13,12 +17,10 @@ public class Solution {
     // Complete the sherlockAndAnagrams function below.
     static int sherlockAndAnagrams(String s) {
         HashTable hashTable = new HashTable(s.length() * s.length() * 4);
-        substrings(s).forEach(hashTable::insert);
-        return substrings(s).mapToInt(s1 -> {
-            if (hashTable.remove(s1) && hashTable.remove(reversed(s1))) {
-                return 1;
-            }
-            return 0;
+        substrings(s).map(Solution::ordered).forEach(hashTable::insert);
+        return substrings(s).map(Solution::ordered).mapToInt(s1 -> {
+            hashTable.remove(s1);
+            return hashTable.count(s1);
         }).sum();
     }
 
@@ -27,8 +29,8 @@ public class Solution {
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
-//        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
+//        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int q = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
@@ -45,6 +47,10 @@ public class Solution {
         bufferedWriter.close();
 
         scanner.close();
+    }
+
+    static String ordered(String s) {
+        return s.chars().sorted().mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
     }
 
     static Stream<String> substrings(String s) {
@@ -108,6 +114,15 @@ public class Solution {
             System.arraycopy(tmp, index + 1, hashtable[bucket], index, hashtable[bucket].length - index);
 
             return true;
+        }
+
+        public int count(String string) {
+            int bucket = hash(string);
+            String[] strings = hashtable[bucket];
+            if (strings == null) {
+                return 0;
+            }
+            return (int) Arrays.stream(strings).filter(data -> data.equals(string)).count();
         }
 
         public boolean contains(String string) {
